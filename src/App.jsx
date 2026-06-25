@@ -54,7 +54,7 @@ function VoiceCard({ voice, selected, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-150 ${
+      className={`w-full text-left px-3 py-2.5 rounded-lg transition-all duration-150 ${
         selected
           ? "bg-violet-600 text-white shadow-lg shadow-violet-900/40"
           : "bg-slate-800/60 text-slate-300 hover:bg-slate-700/80"
@@ -63,7 +63,9 @@ function VoiceCard({ voice, selected, onClick }) {
       <div className="flex items-center gap-2">
         <span className="text-base">{voice.flag}</span>
         <div>
-          <div className="text-sm font-semibold leading-tight">{voice.name}</div>
+          {/* <div className="text-sm font-semibold leading-tight"> */}
+        <div className="text-sm sm:text-sm font-semibold leading-tight">
+            {voice.name}</div>
           <div className={`text-[11px] ${selected ? "text-violet-200" : "text-slate-500"}`}>{voice.lang}</div>
         </div>
       </div>
@@ -169,12 +171,13 @@ export default function App() {
     <div className="min-h-screen bg-[#080C1A] text-white font-sans">
       {/* ── Ambient glow ── */}
       <div className="pointer-events-none fixed inset-0 overflow-hidden">
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-violet-700/20 rounded-full blur-[120px]" />
-        <div className="absolute top-1/2 -right-48 w-[500px] h-[500px] bg-indigo-700/15 rounded-full blur-[140px]" />
+        <div className="absolute -top-32 -left-32 w-64 sm:w-96 h-64 sm:h-96 bg-violet-700/20 rounded-full blur-[100px] sm:blur-[120px]" />
+        <div className="absolute top-1/2 -right-32 sm:-right-48 w-72 sm:w-[500px] h-72 sm:h-[500px] bg-indigo-700/15 rounded-full blur-[100px] sm:blur-[140px]" />
       </div>
 
       {/* ── Header ── */}
-      <header className="relative z-10 border-b border-slate-800/60 px-6 py-4 flex items-center justify-between">
+      {/* <header className="relative z-10 border-b border-slate-800/60 px-6 py-4 flex items-center justify-between"> */}
+      <header className="relative z-10 border-b border-slate-800/60 px-4 sm:px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-lg bg-violet-600 flex items-center justify-center shadow-lg shadow-violet-900/50">
             <span className="text-sm font-black">N</span>
@@ -184,20 +187,36 @@ export default function App() {
             <p className="text-[11px] text-slate-500 leading-none mt-0.5">TTS Studio</p>
           </div>
         </div>
-        <div className="flex items-center gap-2 text-[11px] text-slate-500">
+        {/* <div className="flex items-center gap-2 text-[11px] text-slate-500"> */}
+        <div className="hidden sm:flex items-center gap-2 text-[11px] text-slate-500">
           <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse" />
           Edge-TTS Engine
         </div>
       </header>
 
       {/* ── Main layout ── */}
-      <div className="relative z-10 flex flex-col lg:flex-row h-[calc(100vh-65px)]">
+      {/* <div className="relative z-10 flex flex-col lg:flex-row h-[calc(100vh-65px)]"> */}
+      <div className="relative z-10 flex flex-col lg:flex-row min-h-[calc(100vh-65px)]">
 
         {/* ── Left panel: voice + settings ── */}
-        <aside className="w-full lg:w-72 xl:w-80 border-b lg:border-b-0 lg:border-r border-slate-800/60 flex flex-col">
+        {/* <aside className="w-full lg:w-72 xl:w-80 border-b lg:border-b-0 lg:border-r border-slate-800/60 flex flex-col"> */}
+        <aside className="
+            w-full
+            lg:w-72
+            xl:w-80
+            border-b
+            lg:border-b-0
+            lg:border-r
+            border-slate-800/60
+            flex
+            flex-col
+            max-h-[50vh]
+            lg:max-h-none
+            ">
 
           {/* Voice selector */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {/* <div className="flex-1 overflow-y-auto p-4 space-y-4"> */}
+          <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-4">
             <div>
               <h2 className="text-[11px] uppercase tracking-widest text-slate-500 mb-3">Voice</h2>
 
@@ -268,7 +287,8 @@ export default function App() {
         </aside>
 
         {/* ── Right panel: text + output ── */}
-        <main className="flex-1 flex flex-col p-4 lg:p-6 gap-4 overflow-y-auto">
+        {/* <main className="flex-1 flex flex-col p-4 lg:p-6 gap-4 overflow-y-auto"> */}
+        <main className="flex-1 flex flex-col p-3 sm:p-4 lg:p-6 gap-4 overflow-y-auto">
 
           {/* Text input */}
           <div className="flex-1 flex flex-col min-h-[200px]">
@@ -279,7 +299,7 @@ export default function App() {
               </span>
             </div>
             <textarea
-              className="flex-1 w-full bg-slate-900/60 border border-slate-700/50 rounded-xl p-4 text-sm text-slate-200
+              className="flex-1 min-h-[220px] sm:min-h-[300px] w-full bg-slate-900/60 border border-slate-700/50 rounded-xl p-3 sm:p-4 text-sm text-slate-200
                          placeholder-slate-600 resize-none focus:outline-none focus:border-violet-500/60
                          focus:ring-1 focus:ring-violet-500/20 transition-all leading-relaxed"
               placeholder="Type or paste your text here…"
@@ -319,7 +339,8 @@ export default function App() {
           {/* Audio player */}
           {audioUrl && (
             <div className="bg-slate-900/70 border border-slate-700/40 rounded-xl p-4 space-y-3">
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between"> */}
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <div className="w-8 h-8 rounded-lg bg-violet-600/20 border border-violet-500/30 flex items-center justify-center">
                     <span className="text-violet-400 text-xs">🎙</span>
@@ -355,7 +376,8 @@ export default function App() {
           )}
 
           {/* Current settings summary */}
-          <div className="flex gap-2 flex-wrap">
+          {/* <div className="flex gap-2 flex-wrap"> */}
+          <div className="flex gap-2 flex-wrap justify-center sm:justify-start">
             {[
               { label: "Speed",  val: formatPercent(speed)  },
               { label: "Pitch",  val: formatHz(pitch)       },
@@ -370,7 +392,7 @@ export default function App() {
         </main>
       </div>
 
-      <style>{`
+      {/* <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
         body { font-family: 'Inter', sans-serif; }
         h1   { font-family: 'Sora', sans-serif; }
@@ -382,7 +404,69 @@ export default function App() {
         ::-webkit-scrollbar       { width: 4px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #334155; border-radius: 9999px; }
-      `}</style>
+      `}
+      
+      
+      </style> */}
+      <style>{`
+  @import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+  html,
+  body,
+  #root {
+    width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1 {
+    font-family: 'Sora', sans-serif;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  textarea {
+    font-size: 16px;
+  }
+
+  @keyframes wave {
+    from {
+      transform: scaleY(0.3);
+    }
+    to {
+      transform: scaleY(1);
+    }
+  }
+
+  audio::-webkit-media-controls-panel {
+    background: #1e1b3a;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 9999px;
+  }
+
+  @media (max-width: 640px) {
+    .mobile-stack {
+      flex-direction: column;
+    }
+  }
+`}</style>
     </div>
   );
 }
